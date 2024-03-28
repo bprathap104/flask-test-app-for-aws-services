@@ -4,7 +4,7 @@
 sudo apt update
 
 # Install Python3 and pip3
-sudo apt install -y python3 python3-pip net-tools
+sudo apt install -y python3 python3-pip net-tools unzip
 
 # Install Git
 sudo apt install -y git
