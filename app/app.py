@@ -7,7 +7,7 @@ app = Flask(__name__)
 db_config = {
     'user': 'postgres',
     'password': 'postgres',
-    'host': 'aurora-mysql-cluster.cluster-c3c60q4mqh22.us-east-1.rds.amazonaws.com',
+    'host': 'DB_ENDPOINT',
     'database': 'mavenmovies',
     'cursorclass': pymysql.cursors.DictCursor
 }

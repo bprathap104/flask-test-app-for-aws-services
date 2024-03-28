@@ -10,7 +10,7 @@ data "aws_availability_zones" "available" {
 
 # Define the VPC where the RDS cluster will be deployed
 data "aws_vpc" "selected" {
-  id = "vpc-0d3248ec285276864" # Replace with your VPC ID
+  id = "vpc-088944afb91b96a4f" # Replace with your VPC ID
 }
 
 # Data source for the private subnets
@@ -91,3 +91,9 @@ resource "aws_rds_cluster_instance" "aurora_instance" {
   publicly_accessible  = true
 }
 
+resource "aws_ssm_parameter" "aurora_endpoint" {
+  name  = "/demo/practice/aurora-endpoint"
+  type  = "String"
+  value = aws_rds_cluster.aurora_cluster.endpoint
+  overwrite = true
+}
