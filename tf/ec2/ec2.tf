@@ -39,9 +39,10 @@ data "aws_iam_policy_document" "ssm_assume_role_policy" {
   }
 }
 
+data "aws_caller_identity" "current" {}
 resource "aws_iam_role_policy_attachment" "ssm_managed_policy" {
   role       = aws_iam_role.ssm_role.name
-  policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
+  policy_arn = "arn:aws:iam:::aws:policy/AmazonSSMManagedInstanceCore"
 }
 
 resource "aws_iam_policy" "ssm_parameter_store_read_policy" {
@@ -67,7 +68,7 @@ EOF
 
 resource "aws_iam_role_policy_attachment" "ssm_custom_policy" {
   role       = aws_iam_role.ssm_role.name
-  policy_arn = "arn:aws:iam::aws:policy/SSMParameterStoreReadPolicy"
+  policy_arn = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:058264499673:policy/SSMParameterStoreReadPolicy"
 }
 
 resource "aws_iam_instance_profile" "ssm_profile" {

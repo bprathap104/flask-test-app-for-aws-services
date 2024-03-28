@@ -11,6 +11,11 @@ sudo apt install -y git
 
 git clone https://github.com/bprathap104/flask-test-app-for-aws-services.git
 
+
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+
 # Navigate into the cloned repository directory
 mv flask-test-app-for-aws-services /home/ubuntu/
 cd /home/ubuntu/flask-test-app-for-aws-services/app/
