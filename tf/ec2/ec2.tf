@@ -18,6 +18,7 @@ resource "aws_instance" "example" {
 
   user_data = file("user-data.sh")
   iam_instance_profile = aws_iam_instance_profile.ssm_profile.name
+  vpc_security_group_ids = [data.aws_security_group.web_server_sg.id]
 
   tags = {
     Name = "Example Instance (Ubuntu)"
@@ -74,4 +75,11 @@ resource "aws_iam_role_policy_attachment" "ssm_custom_policy" {
 resource "aws_iam_instance_profile" "ssm_profile" {
   name = "ssm-profile"
   role = aws_iam_role.ssm_role.name
+}
+
+data "aws_security_group" "web_server_sg" {
+  filter {
+    name   = "group-name"
+    values = ["web-server-sg*"]
+  }
 }

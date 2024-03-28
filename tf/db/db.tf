@@ -37,7 +37,7 @@ resource "aws_security_group" "aurora_security_group" {
     from_port       = 3306
     to_port         = 3306
     protocol        = "tcp"
-    security_groups = [aws_security_group.web_server_sg.id]
+    cidr_blocks     = ["0.0.0.0/0"]
   }
 }
 # Define the web server security group
