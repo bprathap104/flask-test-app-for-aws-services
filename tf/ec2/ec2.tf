@@ -44,6 +44,32 @@ resource "aws_iam_role_policy_attachment" "ssm_managed_policy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
 }
 
+resource "aws_iam_policy" "ssm_parameter_store_read_policy" {
+  name        = "SSMParameterStoreReadPolicy"
+  description = "Policy to allow reading from AWS Systems Manager Parameter Store"
+  policy      = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ssm:GetParameter",
+        "ssm:GetParameters",
+        "ssm:GetParametersByPath"
+      ],
+      "Resource": "*"
+    }
+  ]
+}
+EOF
+}
+
+resource "aws_iam_role_policy_attachment" "ssm_custom_policy" {
+  role       = aws_iam_role.ssm_role.name
+  policy_arn = "arn:aws:iam::aws:policy/SSMParameterStoreReadPolicy"
+}
+
 resource "aws_iam_instance_profile" "ssm_profile" {
   name = "ssm-profile"
   role = aws_iam_role.ssm_role.name
